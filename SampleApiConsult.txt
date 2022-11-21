@@ -1,0 +1,40 @@
+		/*****************************************************************************************************************************/
+                /**Establecemos los campos a enviar por el metodo POST, el numero a consultar y el token*/
+                $number = "10441054209";
+                                                                                                              
+                $url_api= "https://www.hayagroup.pe/apirestconsult/apirest";
+                
+                /**Parametros para el JSON */
+                $parametros = array(
+                    "numero"	=> $number,
+                    "token"   => $token
+                );
+                                
+                $dataJSON = json_encode($parametros);
+                
+                /**Invocamos el servicio hayagroup.pe*/
+                /**Ejemplo cURL para JSON*/        
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url_api);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type:application/json'));
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $dataJSON);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $respuesta  = curl_exec($ch);
+                $intReturnCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                curl_close($ch);
+
+                /**Verificamos que el servicio este ONLINE o haya conexión a internet */
+                if ($intReturnCode != 200 && $intReturnCode != 302 && $intReturnCode != 304) {
+                    return false;
+                }else{
+                    $respuesta = json_decode($respuesta, true);
+                    if (!$respuesta['estado']) {
+                        //Mostramos los errores si los hay en formato JSON.
+                        echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+                    } else {
+                        //Mostramos la respuesta en formato JSON.                   
+                        echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
+                    }
+                }
