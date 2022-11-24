@@ -14,8 +14,10 @@
 
         public static function setCHMOD(){
             $nombre_fichero = 'assets/data/padron_reducido_ruc.txt';
-            chmod($nombre_fichero, 0777);
-            //unlink($nombre_fichero);
+            if(file_exists($nombre_fichero)) {
+                chmod($nombre_fichero, 0777);
+                unlink($nombre_fichero);                
+            }            
         }
 
         public static function setUnZipFile(){

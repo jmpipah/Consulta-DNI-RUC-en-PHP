@@ -9,9 +9,9 @@
         if(method_exists($controller, $method)){
             $controller->{$method}($params);            
         }else{
-            require_once("controllers/Error.php");
+            require_once("Controllers/Error.php");
         }
     }else{
-        require_once("controllers/Error.php");
+        require_once("Controllers/Error.php");
     }
     
