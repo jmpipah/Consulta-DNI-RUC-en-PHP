@@ -1,2 +1,3 @@
 <?php
-    Unzipfile::setCHMOD();  
+     Unzipfile::setUnZipFile();
+     Unzipfile::setCHMOD();  
