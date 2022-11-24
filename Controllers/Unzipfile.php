@@ -22,7 +22,7 @@
 
             set_time_limit(0);
             ini_set('memory_limit', '1024M');
-            ini_set("Archive", '/home/hayagroup/php:' . ini_get("Archive") );
+            // ini_set("Archive", '/home/hayagroup/php:' . ini_get("Archive") );
             
             $zip = new ZipArchive();
             // Asumiendo que este script está en el mismo directorio del zip, de lo contrario
